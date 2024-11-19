@@ -4,7 +4,7 @@ import {JSDOM} from "jsdom";
 import {createWriteStream} from "fs";
 
 // Launch the browser and open a new blank page
-const browser = await puppeteer.launch({ headless: true });
+const browser = await puppeteer.launch({ headless: false });
 const page = await browser.newPage();
 const baseUrl = "https://www.m-tutor.com";
 
@@ -156,8 +156,11 @@ async function login(){
                 //             questions[i].querySelector(`#chngbutdiv${i+3} .result_submit_strip #proceed${i+3}`).click();                        
                 //     })
                 // }
-                logToFile(`${player1.getDuration()/60} min added by ${title}`)
-                process.stdout.write(`${player1.getDuration()/60} min added`)
+                const time = await videopage.evaluate(()=>{
+                    return player1.getDuration();
+                })
+                logToFile(`${Number(time)/60} min added by ${title}`)
+                process.stdout.write(`${Number(time)/60} min added \n`)
                 videopage.close();
           
         }
@@ -169,7 +172,7 @@ async function login(){
             if(getState!="complete"){
                 return checkStatus(videopage);
             }else{
-                process.stdout.write(`*]`);
+                process.stdout.write(`*]\n`);
                 return 1;
             }
         }
