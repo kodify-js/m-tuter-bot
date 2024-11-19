@@ -4,7 +4,7 @@ import {JSDOM} from "jsdom";
 import {createWriteStream} from "fs";
 
 // Launch the browser and open a new blank page
-const browser = await puppeteer.launch({ headless: false });
+const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
 const baseUrl = "https://www.m-tutor.com";
 
