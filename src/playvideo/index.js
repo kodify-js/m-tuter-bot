@@ -1,7 +1,7 @@
 import { browser } from "../puppeteer/index.js";
 import {videoStatus,videoStatus2} from "../videostatus/index.js";
 import {logToFile} from "../utils/index.js";
-import mcq from "../Questions/mcq/index.js";
+import question from "../Questions/index.js";
 
 export default async function playVideo(video,title) {
     const videopage = await browser.newPage(); // new tab
@@ -15,7 +15,7 @@ export default async function playVideo(video,title) {
     process.stdout.write(`\r Watching ${title} \n`);
     await videoStatus(videopage); // current video status
     try {
-        await mcq(videopage); //Assessment
+        await question(videopage); //Assessment
     } catch (error) {
         
     }

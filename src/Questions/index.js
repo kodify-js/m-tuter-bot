@@ -1,4 +1,4 @@
-export default async function mcq(videopage) {
+export default async function question(videopage) {
     await videopage.waitForSelector(".container-fluid  div.row div div div .question")
         const delay = ms => new Promise(res => setTimeout(res, ms));
         await delay(10000);
