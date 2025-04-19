@@ -8,9 +8,13 @@ export default async function playVideo(video,title) {
     // Set screen size.
     await videopage.setViewport({width: 1080, height: 1024});
     await videopage.goto(video); // video iframe link page
-    await videopage.waitForSelector("#player1");
+    await videopage.waitForSelector("video");
     await videopage.evaluate(()=>{
-        player1.play() //play video
+        document.querySelectorAll("video").forEach((video)=>{
+            video.muted = true; // mute video
+            video.playbackRate = 15; // set playback speed
+            player1.play()// play video
+        })
     })
     process.stdout.write(`\r Watching ${title} \n`);
     await videoStatus(videopage); // current video status
